@@ -29,6 +29,7 @@ The prompt should:
 - Define what constitutes an "idea"  
   (e.g., *"Your task is to segment the following text into discrete propositions that express predications of a verb (a statement that attributes an action, state, or relation to a subject). A single sentence can contain multiple propositions of this sort. Separate these propositions using the rules and examples below."*)
 - Include examples (recommended)
+
   **Examples:**
   Input:
   The primary colors are red, blue, and yellow.
