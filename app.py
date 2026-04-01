@@ -5,14 +5,15 @@ from openai import OpenAI
 from dotenv import load_dotenv
 from tqdm import tqdm
 
+#API key and model 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-MODEL = "gpt-4o-2024-11-20"
-
+API_KEY = os.getenv("OPENAI_API_KEY")
+MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-2024-11-20")
+if not API_KEY:
+    raise ValueError("OPENAI_API_KEY not found in environment variables.")
+client = OpenAI(api_key=API_KEY)
 
 def segment_text(text, few_shot_prompt):
-    """Send text to the model and return list of parsed ideas"""
     try:
         response = client.chat.completions.create(
             model=MODEL,
@@ -33,9 +34,7 @@ def segment_text(text, few_shot_prompt):
     except Exception as e:
         return [f"Error: {e}"]
 
-
 def run_segmentation(file, prompt):
-    """Main function called by Gradio when user uploads and clicks submit"""
     if file is None or prompt is None:
         return "Please upload a tab-delimited file with id and text columns."
 
@@ -60,17 +59,16 @@ def run_segmentation(file, prompt):
     out_df.to_csv(out_path, sep="\t", index=False)
     return out_path
 
-
-# ------------------------------
-# Gradio Interface
-# ------------------------------
-with gr.Blocks(title="LLM Idea Segmentation") as demo:
-    gr.Markdown("## LLM Idea Segmentation Tool\nUpload texts and prompt.")
-
-    file_input = gr.File(label="Upload Summaries File (tab-delimited .txt)")
+#Gradio Interface
+with gr.Blocks(title="LLM Idea Parser") as demo:
+    gr.Markdown(
+        "## LLM Idea Parsing Tool\n"
+        "Upload a tab-delimited input file with `id` and `text` columns, and a .txt file containing the prompt."
+    )
+    file_input = gr.File(label="Upload Input File (tab-delimited .txt)")
     prompt_input = gr.File(label="Upload Prompt File (.txt)")
 
-    run_button = gr.Button("Run Segmentation")
+    run_button = gr.Button("Run")
     output_file = gr.File(label="Download Parsed Output (.txt)")
 
     run_button.click(

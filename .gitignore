@@ -10,3 +10,6 @@ venv/
 # macOS
 .DS_Store
 
+# personalized prompt/environment notes
+setup.txt
+prompt.txt
