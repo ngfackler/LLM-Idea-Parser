@@ -3,7 +3,6 @@
 Segments text into discrete ideas using an LLM (OpenAI GPT-4o) via a Gradio interface.
 
 Author: Nikki Fackler Kaye
----
 
 ## Overview
 
@@ -12,8 +11,6 @@ This application:
 - Uses a few-shot prompt to guide idea parsing
 - Sends each text to an LLM
 - Returns a structured output with one idea per row
-
----
 
 ## Input Format
 
@@ -24,7 +21,6 @@ The input file must be a tab-delimited `.txt` file with the following columns:
 | 1  | Example text here |
 | 2  | Another example |
 
----
 ## Prompt Format
 
 Upload a `.txt` file containing your few-shot prompt.
@@ -33,22 +29,19 @@ The prompt should:
 - Define what constitutes an "idea"  
   (e.g., *"Your task is to segment the following text into discrete propositions that express predications of a verb (a statement that attributes an action, state, or relation to a subject). A single sentence can contain multiple propositions of this sort. Separate these propositions using the rules and examples below."*)
 - Include examples (recommended)
-
-**Examples:**
-Input:
-The primary colors are red, blue, and yellow.
-Output:
-The primary colors are red.
-The primary colors are blue.
-The primary colors are yellow.
-
-Input:
-Earth, which orbits the Sun, is the third planet.
-Output:
-Earth is the third planet.
-Earth orbits the Sun.
-
----
+  **Examples:**
+  Input:
+  The primary colors are red, blue, and yellow.
+  Output:
+  The primary colors are red.
+  The primary colors are blue.
+  The primary colors are yellow.
+  
+  Input:
+  Earth, which orbits the Sun, is the third planet.
+  Output:
+  Earth is the third planet.
+  Earth orbits the Sun.
 
 ## Output
 
@@ -64,8 +57,6 @@ The tool generates a tab-delimited `.txt` file called `parsed_output.txt` in the
 etc.
 
 Each row corresponds to one segmented idea.
-
----
 
 ## API Notes
 
